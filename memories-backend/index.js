@@ -3,15 +3,15 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 
-import postRoutes from './routes/posts.js'
+import postRoutes from "./routes/posts.js";
 
 const app = express();
-
-app.use('/posts',postRoutes)//It means that we can't directly access all the routes in the post instead it should have /post after main URL
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
+
+app.use("/posts", postRoutes); //It means that we can't directly access all the routes in the post instead it should have /post after main URL
 
 const CONNECTION_URL =
   "mongodb+srv://rohan:1898@cluster0.pk2yx.mongodb.net/<dbname>?retryWrites=true&w=majority";
@@ -26,7 +26,6 @@ mongoose
   .then(() =>
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
   )
-  .catch(error=>console.log(error.message));
+  .catch((error) => console.log(error.message));
 
-  mongoose.set('useFindAndModify',false) //This line makes sure that we don't get any warning in the console
-
+mongoose.set("useFindAndModify", false); //This line makes sure that we don't get any warning in the console
