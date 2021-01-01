@@ -1,10 +1,14 @@
+import Post from './Post/Post'
+import useStyles from './style'
 
-const Posts = () =>{
-  return(
-    <h1>
-      Posts
-    </h1>
-  )
-}
+const Posts = () => {
+  const useStyle = useStyles();
+  return (
+    <>
+      <Post />
+      <Post />
+    </>
+  );
+};
 
 export default Posts;
