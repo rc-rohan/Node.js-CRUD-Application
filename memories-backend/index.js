@@ -14,7 +14,7 @@ app.use(cors());
 app.use("/posts", postRoutes); //It means that we can't directly access all the routes in the post instead it should have /post after main URL
 
 const CONNECTION_URL =
-  "mongodb+srv://rohan:1898@cluster0.pk2yx.mongodb.net/<dbname>?retryWrites=true&w=majority";
+  "mongodb+srv://rohan:1898@cluster0.pk2yx.mongodb.net/memoriesProjectDB?retryWrites=true&w=majority";
 
 const PORT = process.env.PORT || 5000;
 
@@ -24,7 +24,8 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() =>
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+    //If the connection to the database is succesful
+    app.listen(PORT, () => console.log(`DB connection Successful and Server running on port ${PORT}`))
   )
   .catch((error) => console.log(error.message));
 

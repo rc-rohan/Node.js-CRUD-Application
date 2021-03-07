@@ -18,3 +18,12 @@ export const getPosts = () => async (dispatch) => {
   //in redux thunk instead of returning the function we use dispatch the function
   // dispatch(action);
 };
+
+export const createPost = (post) => async (dispatch) =>{
+  try {
+    const {data} = api.createPosts(post);
+    dispatch({type: "CREATE" , payload: data})
+  } catch (error) {
+    console.log(error);
+  }
+}
