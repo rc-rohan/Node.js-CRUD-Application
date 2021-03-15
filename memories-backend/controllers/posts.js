@@ -68,13 +68,12 @@ export const deletePost = async (req, res) => {
 
 export const likePost = async (req, res) => {
   try {
-    const { id: _id } = req.params;
-    const post = PostMessage.findById(_id);
-
-    const updatedPost = PostMessage.findByIdAndUpdate(
-      _id,
+    const id = req.params.id;
+    const post = await PostMessage.findById(id);
+    // console.log("post from like", post);
+    const updatedPost = await PostMessage.findByIdAndUpdate(
+      id,
       {
-        ...post,
         likeCount: post.likeCount + 1,
       },
       { new: true }
@@ -83,7 +82,7 @@ export const likePost = async (req, res) => {
     res.status(200).json({
       status: "success",
       message: "successfully updated",
-      data: updatePost,
+      data: updatedPost,
     });
   } catch (error) {
     res.status(404).json({
