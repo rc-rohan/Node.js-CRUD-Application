@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import FileBase from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,11 +22,11 @@ const Form = ({ currentId, setCurrentId }) => {
 
   const dispatch = useDispatch();
 
-  useEffect(()=>{
-    if(post){
+  useEffect(() => {
+    if (post) {
       setPostData(post);
     }
-  },[post])
+  }, [post]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -56,7 +56,9 @@ const Form = ({ currentId, setCurrentId }) => {
         className={`${classes.root} ${classes.form} `}
         onSubmit={handleSubmit}
       >
-        <Typography variant="h6">{currentId?`Editing`:'Creating'} a Memory</Typography>
+        <Typography variant="h6">
+          {currentId ? `Editing` : "Creating"} a Memory
+        </Typography>
         <TextField
           name="creator"
           variant="outlined"
@@ -91,7 +93,9 @@ const Form = ({ currentId, setCurrentId }) => {
           label="Tags"
           fullWidth
           value={postData.tags}
-          onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
+          onChange={(e) =>
+            setPostData({ ...postData, tags: e.target.value.split(",") })
+          }
         />
         <div className={classes.fileInput}>
           <FileBase
